@@ -17,21 +17,20 @@ public class Main {
         }
 
         while (true) {
-            System.out.println();
-            System.out.println("1 - Generate the Strong Password");
-            System.out.println("2 - Check the password Strength");
-            System.out.println("3 - Save a New Password (with Security Validation)");
-            System.out.println("4 - Retrive Stored Passwords");
-            System.out.println("5 - Delete a Stored Password");
-            System.out.println("6 - View Password Guidelines & Rules");
-            System.out.println("7 - View Password Change History");
-            System.out.println("8 - Detect Repeated passwords");
-            System.out.println("9 - Password Recovery (Simulated)");
-            System.out.println("10 - Multi-Factor Authentication Setup (Simulated)");
-            System.out.println("11 -  Simulate Cloud Backup (Export/Import)");
-            System.out.println("12 - Monitor Compliance Logs");
-            System.out.println("0 - Quit");
-            System.out.print("Enter the Your Choice: ");
+            System.out.println("\n=== Password Manager ===");
+            System.out.println("1. Generate Password");
+            System.out.println("2. Check Password Strength");
+            System.out.println("3. Save Password");
+            System.out.println("4. Retrieve Passwords");
+            System.out.println("5. Delete Password");
+            System.out.println("6. Simulate Recovery");
+            System.out.println("7. Simulate MFA");
+            System.out.println("8. Simulate Cloud Backup");
+            System.out.println("9. Show Compliance Logs");
+            System.out.println("10. Password Guidelines");
+            System.out.println("11. Show Password History");
+            System.out.println("0. Exit");
+            System.out.print("Choose an option: ");
 
             int choice;
             try {
@@ -63,7 +62,22 @@ public class Main {
                     passwordManager.deletePassword(sc);
                 }
                 case 6 -> {
+                    passwordManager.simulateRecovery(sc);
+                }
+                case 7 -> {
+                    passwordManager.simulateMFA(sc);
+                }
+                case 8 -> {
+                    passwordManager.simulateCloudBackup();
+                }
+                case 9 -> {
+                    passwordManager.showComplianceLogs();
+                }
+                case 10 -> {
                     passwordManager.getUsefulInformation();
+                }
+                case 11 -> {
+                    passwordManager.showPasswordHistory();
                 }
                 case 0 -> {
                     System.out.println("Exiting the program. Goodbye See You Soon Buddy!");

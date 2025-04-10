@@ -7,8 +7,11 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.io.*;
 import java.security.SecureRandom;
+import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Scanner;
 import java.sql.ResultSet;
+import java.util.Set;
 
 
 import static org.example.Main.FILE_NAME;
@@ -16,7 +19,7 @@ import static org.example.Main.FILE_NAME;
 public class PasswordManager {
     private static final String ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()-_+=<>?";
     private static final int PASSWORD_LENGTH = 12; // Length of the generated password
-
+    private static final Set<String> passwordHistory = new HashSet<>();
     // Generate a Strong Password
     public String generatePassword() {
         StringBuilder password = new StringBuilder(PASSWORD_LENGTH);
@@ -78,6 +81,15 @@ public class PasswordManager {
             }
             System.out.print("Enter the password to save: ");
             String password = sc.nextLine();
+            if (!isSecurePassword(password)) {
+                System.out.println("❌ Password doesn't meet security rules.");
+                return;
+            }
+
+            if (passwordHistory.contains(password)) {
+                System.out.println("❌ Reused password detected.");
+                return;
+            }
 
              // Hashing for security
 
@@ -90,13 +102,22 @@ public class PasswordManager {
                 pstmt.setString(2, password);
                 pstmt.executeUpdate();
 
+                passwordHistory.add(password);
+                logCompliance("Saved new password for: " + label);
+
                 System.out.println("Password saved successfully!");
             } catch (SQLException e) {
                 System.out.println("Error saving password: " + e.getMessage());
             }
         }
 
-
+    public boolean isSecurePassword(String password) {
+        return password.length() >= 8 &&
+                password.matches(".*[A-Z].*") &&
+                password.matches(".*[a-z].*") &&
+                password.matches(".*\\d.*") &&
+                password.matches(".*[!@#$%^&*()].*");
+    }
     public void retrievePasswords() {
         String sql = "SELECT label, password_save FROM passwords";
 
@@ -141,8 +162,53 @@ public class PasswordManager {
         }
     }
 
+    public void simulateRecovery(Scanner sc) {
+        System.out.print("Enter your registered email for recovery: ");
+        String email = sc.nextLine();
+        System.out.println("OTP sent to " + email + " (Simulated)");
+        System.out.print("Enter OTP: ");
+        String otp = sc.nextLine();
+        if (otp.equals("123456")) {
+            System.out.println("✅ Identity Verified. You may reset your password.");
+        } else {
+            System.out.println("❌ Invalid OTP. Try again.");
+        }
+    }
 
+    public void simulateMFA(Scanner sc) {
+        System.out.print("Enter OTP: ");
+        String otp = sc.nextLine();
+        if (otp.equals("123456")) {
+            System.out.println("✅ MFA Success.");
+        } else {
+            System.out.println("❌ MFA Failed.");
+        }
+    }
+    public void simulateCloudBackup() {
+        System.out.println("[✓] Cloud backup simulated (file export)...");
+        // Additional file writing logic can go here
+    }
 
+    public void logCompliance(String message) {
+        try (FileWriter fw = new FileWriter("compliance_log.txt", true);
+             BufferedWriter bw = new BufferedWriter(fw);
+             PrintWriter out = new PrintWriter(bw)) {
+            out.println(LocalDateTime.now() + ": " + message);
+        } catch (IOException e) {
+            System.out.println("Failed to log compliance: " + e.getMessage());
+        }
+    }
+
+    public void showComplianceLogs() {
+        try (BufferedReader br = new BufferedReader(new FileReader("compliance_log.txt"))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                System.out.println(line);
+            }
+        } catch (IOException e) {
+            System.out.println("No logs found or error reading log file.");
+        }
+    }
     // Provide useful information
     public void getUsefulInformation() {
         System.out.println();
@@ -156,5 +222,11 @@ public class PasswordManager {
         System.out.println("Avoid using information that the user's colleagues and/or " +
                 "acquaintances might know to be associated with the user.");
         System.out.println("Do not use passwords that consist wholly of any simple combination of the aforementioned weak components.");
+    }
+    public void showPasswordHistory(){
+        System.out.println("---Password History---");
+        for(String pwd: passwordHistory){
+            System.out.println(pwd);
+        }
     }
 }

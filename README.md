@@ -1,16 +1,34 @@
-# SecurePass-Vault :
-To build a secure and robust password management application that promotes safe digital practices by storing, managing, and strengthening passwords while ensuring maximum user data protection.
 
-# Features :
-| Feature                                                                                                       | 	Description |
-|---------------------------------------------------------------------------------------------------------------|--|
-| ✅ Encourage Security Over Convenience	                                                                        | Enforces strong password rules, warns against weak passwords |
-| ✅ Counter Phishing Attacks	| Domain checking, alert for suspicious links or labels                              
-| ✅ Drive Strong Passwords	| Auto-generate strong passwords with character diversity                              
-| ✅ Record Password Changes	| Maintain password history for every label                                           
-| ✅ Remove Repeated Passwords	| Detect and block reused passwords                                                 
-| ✅ Phase Out Browser-Based Password Management	| Offers centralized app-based password handling                  
-| ✅ Address Lost Passwords	| Identity-based recovery questions or OTP via email                                   
-| ✅ Ensure Multi-Factor Authentication (MFA)	| Add OTP verification or code confirmation (simulated without APIs) 
-| ✅ Adopt Cloud Sync	| Simulated cloud backup (can be a file upload/download or DB sync simulation)               
-| ✅ Monitor Compliance	| Track login attempts, weak password usage, old passwords, etc.                           
+# 🔐 SecurePass Vault - Java CLI Password Manager
+
+**SecurePass Vault** is a feature-rich, secure Command-Line Interface (CLI) Password Manager built using **Core Java**, **JDBC**, and **MySQL**. It provides robust password generation, storage, and management with advanced features like phishing detection, MFA simulation, and compliance logging.
+
+---
+
+## 🚀 Key Features
+
+- ✅ **Add, View & Delete Passwords** securely
+- 🔐 **Password Strength Checker** (Very Weak to Very Strong)
+- 🧠 **Smart Password Generator** (randomized secure password with symbols)
+- ⚠️ **Phishing Detection** (warns if labels include risky terms like 'bank', 'login', etc.)
+- ♻️ **Duplicate Password Detection** (prevents reuse of previous session passwords)
+- 📋 **Password History Tracker**
+- 📜 **Compliance Logging** for password operations
+- ☁️ **Simulated Cloud Backup** (mock export)
+- 🔐 **Simulated Multi-Factor Authentication (MFA)**
+- 🛟 **Simulated Password Recovery using OTP**
+- 📚 **Password Security Guidelines**
+
+---
+
+## 🧱 Tech Stack
+
+- **Java (Core + JDBC)**
+- **MySQL** – Secure backend database
+- **File I/O** – Used for compliance logging
+- **CLI Terminal** – Lightweight and interactive
+
+---
+
+## 📁 Project Structure
+
