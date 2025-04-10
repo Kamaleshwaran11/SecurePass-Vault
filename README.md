@@ -105,7 +105,7 @@ java -cp ".:mysql-connector-java.jar" org.example.Main
 
 - Simulated Cloud Backup: Mimics cloud export with a local file log.
 
-- 🔧 These features can be upgraded using real services like JavaMail API, AWS S3 SDK, or Twilio for OTP.
+🔧 These features can be upgraded using real services like JavaMail API, AWS S3 SDK, or Twilio for OTP.
 
 ## 💡 Future Enhancements
 - GUI Interface using JavaFX/Swing
@@ -118,9 +118,16 @@ java -cp ".:mysql-connector-java.jar" org.example.Main
 
 - Export to CSV/JSON
 
--Real Email OTP Support
+- Real Email OTP Support
 
 ## 👨‍💻 Developed By
-Kamaleshwaran.S
-📍 Chennai, India
-🌐 Portfolio <link href="https://kamaleshwaran11.github.io/"> | 💻 GitHub
+
+ Kamaleshwaran.S
+
+ 📍 Chennai, India
+
+ 🌐 Portfolio <link href="https://kamaleshwaran11.github.io/"> | 💻 GitHub
+
+## 🪪 License
+This project is licensed under the MIT License. </br>
+Feel free to use and contribute!
